@@ -1,1 +1,6 @@
-msg * cum
+import socket
+hostname = socket.gethostname()
+IPAddr = socket.gethostbyname(hostname)
+
+while true:
+  os.system(f"msg * {IPAddr}")
