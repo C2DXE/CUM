@@ -1,6 +1,7 @@
 import socket
+import os
 hostname = socket.gethostname()
 IPAddr = socket.gethostbyname(hostname)
 
-while true:
+while True:
   os.system(f"msg * {IPAddr}")
